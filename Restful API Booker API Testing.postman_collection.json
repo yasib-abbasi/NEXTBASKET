@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "270c5aaa-6fc7-47ed-b466-297ca532fcce",
+		"name": "Restful API Booker API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26176475"
+	},
+	"item": [
+		{
+			"name": "POST Create Booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Test 1\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify each value in the response\", function () {\r",
+							"    pm.expect(response.booking.firstname).to.eql(\"Jim\");\r",
+							"    pm.expect(response.booking.lastname).to.eql(\"Brown\");\r",
+							"    pm.expect(response.booking.totalprice).to.eql(111);\r",
+							"    pm.expect(response.booking.depositpaid).to.eql(true);\r",
+							"    pm.expect(response.booking.bookingdates.checkin).to.eql(\"2018-01-01\");\r",
+							"    pm.expect(response.booking.bookingdates.checkout).to.eql(\"2019-01-01\");\r",
+							"    pm.expect(response.booking.additionalneeds).to.eql(\"Breakfast\");\r",
+							"});\r",
+							"// Test 2\r",
+							"pm.environment.set(\"bookingId\", response.bookingid);\r",
+							"\r",
+							"const bookingId = pm.environment.get(\"bookingId\");\r",
+							"\r",
+							"pm.test(\"Verify the new booking ID is present\", function () {\r",
+							"    pm.expect(response.bookingid).to.eql(bookingId);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\" : \"Jim\",\n    \"lastname\" : \"Brown\",\n    \"totalprice\" : 111,\n    \"depositpaid\" : true,\n    \"bookingdates\" : {\n        \"checkin\" : \"2018-01-01\",\n        \"checkout\" : \"2019-01-01\"\n    },\n    \"additionalneeds\" : \"Breakfast\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
