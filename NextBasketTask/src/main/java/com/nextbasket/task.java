@@ -21,10 +21,8 @@ public class task {
             ChromeDriver driver = new ChromeDriver(options);
             driver.get("https://teststoreforsouthafri.nextbasket.shop/");
             driver.manage().window().maximize();
-            // Locate the products
 
-        // Assuming the HTML structure remains the same
-        // Assuming the HTML structure remains the same
+            // Locate the products
         WebDriverWait wait = new WebDriverWait(driver, 20);
         List<WebElement> productContainers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".eYP2W")));
 
@@ -78,22 +76,17 @@ public class task {
         driver.findElement(By.xpath("//p[contains(text(),'Continue as guest')]")).click();
 
 
-        //Checkout Form
+        //Filling Checkout Form
         driver.findElement(By.xpath("//input[contains(@name,'shippingAddress.firstName')]")).sendKeys("Yasib Abbasi");
         driver.findElement(By.xpath("//input[@name='shippingAddress.lastName']")).sendKeys("yasib");
         driver.findElement(By.xpath("//input[@name='shippingAddress.phone']")).sendKeys("+923449416266");
 
-
-        //WebElement selectedElement = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[3]/div[1]/div[1]/div/div/div[2]/div/div[1]/div/div/div/div/input"));
-        //selectedElement.click();
-        //selectedElement.clear();
-
         Thread.sleep(5000);
 
+        //Selecting Value from Country & City
         driver.findElement(By.xpath("//*[@id=\"headlessui-combobox-input-:rf:\"]")).click();
         WebElement country = driver.findElement(By.xpath("//p[contains(text(),'South Africa')]"));
         country.click();
-        //WebElement dropdownElement = driver.findElement(By.xpath("//body/div[@id='__next']/div[@id='root']/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/p[1]"));
 
         Thread.sleep(5000);
         WebElement cityDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("headlessui-combobox-button-:rj:")));
@@ -105,8 +98,8 @@ public class task {
         WebElement inputField = driver.findElement(By.id("headlessui-combobox-input-:rk:"));
         inputField.sendKeys("Alberton");
 
-        // Wait for the oit
-        // ptions to appear
+
+        // options to appear
         List<WebElement> cityOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//ul[@role='listbox']//li")));
 
         // Iterate through the options to find "Alberton"
